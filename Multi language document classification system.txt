@@ -1,0 +1,13 @@
+import opennlp.tools.doccat.*;
+
+public class DocumentClassifier {
+    public static void main(String[] args) throws IOException {
+        InputStream dataIn = new FileInputStream("trainingData.txt");
+        DoccatModel model = DocumentCategorizerME.train("en", dataIn);
+        DocumentCategorizerME categorizer = new DocumentCategorizerME(model);
+
+        String[] document = {"This is a sports article about football"};
+        double[] outcomes = categorizer.categorize(document);
+        System.out.println("Category: " + categorizer.getBestCategory(outcomes));
+    }
+}
